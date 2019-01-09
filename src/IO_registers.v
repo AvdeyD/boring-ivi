@@ -1,8 +1,8 @@
 module IO_registers
-(input 	[3:0]		 input_rf,
-input					 clk_200MHz,
-input 				 reset,
-output reg[3:0]	 rf_s
+(input [3:0]		input_rf,
+input				clk_200MHz,
+input 			reset,
+output reg[3:0]	 	rf_s
 );
 
 always @(posedge clk_200MHz)
