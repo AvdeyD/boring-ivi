@@ -1,47 +1,43 @@
 
 module ivi_i
-(input 						clk_200MHz,
-input 			[3:0]		rf,				// signal for measure and sync signal																		
-input 			[2:0] 	regime,			// regime choice					
-input 						reset,
-input 						polarity,							
-input							access,							
-output reg		[4:0] 	mil_100,			// hundreds of milliseconds						
-output reg		[4:0] 	mil_010,			// tens of  milliseconds
-output reg		[4:0] 	mil_001,			// units of milliseconds				
-output reg		[4:0] 	mic_100,			// micro					
-output reg		[4:0]		mic_010,
-output reg		[4:0]		mic_001,								
-output reg		[4:0]		n_100,			// nano					
-output reg		[4:0] 	n_010,
-output reg		[4:0]		n_001,								
-output reg 					end_measurement
+(input 		clk_200MHz,
+input [3:0]	rf,				// signal for measure and sync signal										
+input [2:0] 	regime,			// regime choice			
+input			reset,
+input 		polarity,							
+input			access,							
+output reg	[4:0] mil_100,			// hundreds of milliseconds	
+output reg	[4:0] mil_010,			// tens of  milliseconds
+output reg	[4:0] mil_001,			// units of milliseconds	
+output reg	[4:0] mic_100,			// micro			
+output reg	[4:0] mic_010,
+output reg	[4:0] mic_001,								
+output reg	[4:0] n_100,			// nano				
+output reg	[4:0] n_010,
+output reg	[4:0] n_001,								
+output reg       end_measurement
 );
-
 			
-reg 				[3:0]		delay_counter;
-reg				[4:0]		mil_100_var;
-reg				[4:0]		mil_010_var;
-reg				[4:0] 	mil_001_var;
-reg				[4:0] 	mic_100_var;
-reg				[4:0] 	mic_010_var;
-reg				[4:0] 	mic_001_var;
-reg				[4:0] 	n_100_var;
-reg				[4:0] 	n_010_var;				
-reg				[4:0] 	n_001_var;							
-reg 							sinc_var;								
-reg 				[2:0] 	Duration_x;	
-reg 				[2:0] 	Period_x;
-reg 				[2:0] 	Delay_x;																		
-reg 				[1:0] 	Duration_z;										
-reg 				[1:0] 	sync_front;									
-reg 				[2:0] 	signal_1_front;
-reg 				[2:0] 	signal_2_front;									 
-reg 				[4:0] 	nanosec_storage;
-reg							access_var;								
-
-
-
+reg [3:0]		delay_counter;
+reg [4:0]		mil_100_var;
+reg [4:0]		mil_010_var;
+reg [4:0] 		mil_001_var;
+reg [4:0] 		mic_100_var;
+reg [4:0] 		mic_010_var;
+reg [4:0] 		mic_001_var;
+reg [4:0] 		n_100_var;
+reg [4:0] 		n_010_var;				
+reg [4:0] 		n_001_var;							
+reg 			sinc_var;								
+reg [2:0] 		Duration_x;	
+reg [2:0] 		Period_x;
+reg [2:0] 		Delay_x;								
+reg [1:0] 		Duration_z;							
+reg [1:0] 		sync_front;				
+reg [2:0] 		signal_1_front;
+reg [2:0] 		signal_2_front;				 
+reg [4:0]	 	nanosec_storage;
+reg			access_var;								
 always @(posedge clk_200MHz)
 
 	begin
@@ -52,7 +48,7 @@ always @(posedge clk_200MHz)
 		mil_100 <= 0;
 		mil_010 <= 0;
 		mil_001 <= 0;
-		mic_100 <= 5'b00110;									
+		mic_100 <= 5'b00110;							
 		mic_010 <= 5'b00101;
 		mic_001 <= 5'b00111;
 		n_100 <= 5'b01000;
@@ -84,7 +80,7 @@ always @(posedge clk_200MHz)
 	
 		begin	
 		sync_front <= {sync_front[0], sinc_var};		
-		signal_1_front <= {signal_1_front[1:0], rf[0]};			
+		signal_1_front <= {signal_1_front[1:0], rf[0]};		
 		signal_2_front <= {signal_2_front[1:0], rf[1]};
 		
 		if (polarity) sinc_var <= rf[2];										
